@@ -22,12 +22,12 @@ namespace CrossPlatform.Services
                 if (pServiceArgs == null)
                     throw new ArgumentNullException("pServiceArgs");
 
-                return await CallCore(pServiceArgs);
+                return await PlatformCall(pServiceArgs);
             }
             catch (Exception ex) { return new ServiceResult(ex); }
         }
 
-        protected internal abstract Task<ServiceResult> CallCore(TServiceArgs pServiceArgs);
+        protected internal abstract Task<ServiceResult> PlatformCall(TServiceArgs pServiceArgs);
     }
 
     public abstract class Service<TServiceResult, TServiceArgs>
@@ -36,9 +36,9 @@ namespace CrossPlatform.Services
     {
         public virtual async Task<TServiceResult> Call(TServiceArgs pServiceArgs)
         {
-            return await CallCore(pServiceArgs);
+            return await PlatformCall(pServiceArgs);
         }
 
-        protected internal abstract Task<TServiceResult> CallCore(TServiceArgs pServiceArgs);
+        protected internal abstract Task<TServiceResult> PlatformCall(TServiceArgs pServiceArgs);
     }
 }
