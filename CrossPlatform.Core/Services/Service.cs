@@ -3,42 +3,40 @@ using System.Threading.Tasks;
 
 namespace CrossPlatform.Services
 {
-    //public abstract class Service
-    //{
-    //    public virtual async Task<ServiceResult> Call()
-    //    {
-    //        return await PlatformCall();
-    //    }
-
-    //    protected internal abstract Task<ServiceResult> PlatformCall();
-    //}
-
-    public abstract class Service<TServiceArgs> where TServiceArgs : ServiceArgs<TServiceArgs>
+    public abstract class Service<TServiceArgs>
+        where TServiceArgs : ServiceArgs<TServiceArgs>
     {
-        public virtual async Task<ServiceResult> Call(TServiceArgs pServiceArgs)
+        public virtual Task<ServiceResult> Execute(TServiceArgs pServiceArgs)
         {
             try
             {
                 if (pServiceArgs == null)
                     throw new ArgumentNullException("pServiceArgs");
 
-                return await PlatformCall(pServiceArgs);
+                return ExecuteCore(pServiceArgs);
             }
-            catch (Exception ex) { return new ServiceResult(ex); }
+            catch (Exception ex) { throw ex; }
         }
 
-        protected internal abstract Task<ServiceResult> PlatformCall(TServiceArgs pServiceArgs);
+        protected internal abstract Task<ServiceResult> ExecuteCore(TServiceArgs pServiceArgs);
     }
 
     public abstract class Service<TServiceResult, TServiceArgs>
         where TServiceResult : ServiceResult
         where TServiceArgs : ServiceArgs<TServiceArgs>
     {
-        public virtual async Task<TServiceResult> Call(TServiceArgs pServiceArgs)
+        public virtual Task<TServiceResult> Execute(TServiceArgs pServiceArgs)
         {
-            return await PlatformCall(pServiceArgs);
+            try
+            {
+                if (pServiceArgs == null)
+                    throw new ArgumentNullException("pServiceArgs");
+
+                return ExecuteCore(pServiceArgs);
+            }
+            catch (Exception ex) { throw ex; }
         }
 
-        protected internal abstract Task<TServiceResult> PlatformCall(TServiceArgs pServiceArgs);
+        protected internal abstract Task<TServiceResult> ExecuteCore(TServiceArgs pServiceArgs);
     }
 }
