@@ -1,5 +1,4 @@
 ﻿using CrossPlatform.Messages;
-using System;
 
 namespace CrossPlatform.Services
 {
@@ -12,11 +11,6 @@ namespace CrossPlatform.Services
         public ServiceResult(MessagesContainer pMessagesContainer) : this()
         {
             this.CopyMessages(pMessagesContainer);
-        }
-
-        public ServiceResult(Exception pException) : this()
-        {
-            this.AddException(pException);
         }
     }
 }
