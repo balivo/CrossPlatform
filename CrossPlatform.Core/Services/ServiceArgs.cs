@@ -1,6 +1,6 @@
 ﻿namespace CrossPlatform.Services
 {
-    public abstract class ServiceArgs<TServiceArgs> where TServiceArgs : ServiceArgs<TServiceArgs>
+    public abstract class ServiceArgs
     {
     }
 }

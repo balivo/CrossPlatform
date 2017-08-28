@@ -3,8 +3,7 @@ using System.Threading.Tasks;
 
 namespace CrossPlatform.Services
 {
-    public abstract class Service<TServiceArgs>
-        where TServiceArgs : ServiceArgs<TServiceArgs>
+    public abstract class Service<TServiceArgs> where TServiceArgs : ServiceArgs
     {
         public virtual Task<ServiceResult> Execute(TServiceArgs pServiceArgs)
         {
@@ -23,7 +22,7 @@ namespace CrossPlatform.Services
 
     public abstract class Service<TServiceResult, TServiceArgs>
         where TServiceResult : ServiceResult
-        where TServiceArgs : ServiceArgs<TServiceArgs>
+        where TServiceArgs : ServiceArgs
     {
         public virtual Task<TServiceResult> Execute(TServiceArgs pServiceArgs)
         {
