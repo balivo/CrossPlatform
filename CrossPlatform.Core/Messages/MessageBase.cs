@@ -12,15 +12,15 @@ namespace CrossPlatform.Messages
 
         }
 
-        public MessageBase(string pSystemKey, string pMessage) : this()
+        public MessageBase(string systemKey, string message) : this()
         {
             try
             {
-                if (string.IsNullOrWhiteSpace(pSystemKey) || string.IsNullOrWhiteSpace(pMessage))
-                    throw new ArgumentNullException(string.Format("Argument null ({0})", "pSystemKey|pMessage"));
+                if (string.IsNullOrWhiteSpace(systemKey) || string.IsNullOrWhiteSpace(message))
+                    throw new ArgumentNullException(string.Format("Argument null ({0})", "systemKey|message"));
 
-                this.SystemKey = pSystemKey;
-                this.Message = pMessage;
+                this.SystemKey = systemKey;
+                this.Message = message;
             }
             catch (Exception ex)
             {

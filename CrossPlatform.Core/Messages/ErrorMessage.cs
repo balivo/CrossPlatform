@@ -8,8 +8,8 @@
 
         }
 
-        public ErrorMessage(string pSystemKey, string pMessage)
-            : base(pSystemKey, pMessage)
+        public ErrorMessage(string systemKey, string message)
+            : base(systemKey, message)
         {
         }
     }

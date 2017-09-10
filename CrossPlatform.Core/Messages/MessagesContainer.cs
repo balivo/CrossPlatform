@@ -78,12 +78,12 @@ namespace CrossPlatform.Messages
 
         #region [ Methods ]
 
-        public void AddBrokenRule(BrokenRuleMessageTypes pType, string pSystemKey, string pMessage)
+        public void AddBrokenRule(BrokenRuleMessageTypes messageType, string systemKey, string message)
         {
             try
             {
-                if (_BrokenRules.Count(lbda => lbda.Type == pType && lbda.SystemKey.Equals(pSystemKey)) == 0)
-                    _BrokenRules.Add(new BrokenRuleMessage(pType, pSystemKey, pMessage));
+                if (_BrokenRules.Count(lbda => lbda.Type == messageType && lbda.SystemKey.Equals(systemKey)) == 0)
+                    _BrokenRules.Add(new BrokenRuleMessage(messageType, systemKey, message));
             }
             catch (Exception ex)
             {
@@ -91,14 +91,14 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void AddBrokenRule(BrokenRuleMessage pBrokenRule)
+        public void AddBrokenRule(BrokenRuleMessage brokenRule)
         {
             try
             {
-                if (pBrokenRule == null)
-                    throw new ArgumentNullException(string.Format("Argument null ({0})", "pBrokenRule"));
+                if (brokenRule == null)
+                    throw new ArgumentNullException(string.Format("Argument null ({0})", "brokenRule"));
 
-                AddBrokenRule(pBrokenRule.Type, pBrokenRule.SystemKey, pBrokenRule.Message);
+                AddBrokenRule(brokenRule.Type, brokenRule.SystemKey, brokenRule.Message);
             }
             catch (Exception ex)
             {
@@ -106,14 +106,14 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void AddBrokenRules(IEnumerable<BrokenRuleMessage> pBrokenRules)
+        public void AddBrokenRules(IEnumerable<BrokenRuleMessage> brokenRules)
         {
             try
             {
-                if (pBrokenRules == null)
-                    throw new ArgumentNullException(string.Format("Argument null ({0})", "pBrokenRules"));
+                if (brokenRules == null)
+                    throw new ArgumentNullException(string.Format("Argument null ({0})", "brokenRules"));
 
-                foreach (var _brokenRule in pBrokenRules)
+                foreach (var _brokenRule in brokenRules)
                 {
                     AddBrokenRule(_brokenRule);
                 }
@@ -124,11 +124,11 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public BrokenRuleMessage GetBrokenRule(string pSystemKey)
+        public BrokenRuleMessage GetBrokenRule(string systemKey)
         {
             try
             {
-                return _BrokenRules.FirstOrDefault(lbda => lbda.SystemKey.Equals(pSystemKey));
+                return _BrokenRules.FirstOrDefault(lbda => lbda.SystemKey.Equals(systemKey));
             }
             catch (Exception ex)
             {
@@ -136,11 +136,11 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public ReadOnlyCollection<BrokenRuleMessage> GetBrokenRules(BrokenRuleMessageTypes pType)
+        public ReadOnlyCollection<BrokenRuleMessage> GetBrokenRules(BrokenRuleMessageTypes messageType)
         {
             try
             {
-                return new ReadOnlyCollection<BrokenRuleMessage>(_BrokenRules.Where(lbda => lbda.Type == pType).ToList());
+                return new ReadOnlyCollection<BrokenRuleMessage>(_BrokenRules.Where(lbda => lbda.Type == messageType).ToList());
             }
             catch (Exception ex)
             {
@@ -148,11 +148,11 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void RemoveBrokenRule(string pSystemKey)
+        public void RemoveBrokenRule(string systemKey)
         {
             try
             {
-                _BrokenRules.RemoveAll(lbda => lbda.SystemKey.Equals(pSystemKey));
+                _BrokenRules.RemoveAll(lbda => lbda.SystemKey.Equals(systemKey));
             }
             catch (Exception ex)
             {
@@ -160,36 +160,11 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void AddRequiredPropertyBrokenRule(string pPropertyName, string pMessage = null)
+        public void AddRequiredPropertyBrokenRule(string propertyName, string message = null)
         {
             try
             {
-                AddBrokenRule(BrokenRuleMessageTypes.Impediment, CreateRequiredPropertyBrokenRuleSystemKey(pPropertyName), string.IsNullOrWhiteSpace(pMessage) ? CreateRequiredPropertyBrokenRuleMessage(pPropertyName) : pMessage);
-            }
-            catch (Exception ex)
-            {
-
-                throw;
-            }
-        }
-
-        public void RemoveRequiredPropertyBrokenRule(string pPropertyName)
-        {
-            try
-            {
-                RemoveBrokenRule(CreateRequiredPropertyBrokenRuleSystemKey(pPropertyName));
-            }
-            catch (Exception ex)
-            {
-                throw;
-            }
-        }
-
-        public void AddInvalidPropertyBrokenRule(string pPropertyName, string pMessage = null)
-        {
-            try
-            {
-                AddBrokenRule(BrokenRuleMessageTypes.Impediment, CreateInvalidPropertyBrokenRuleSystemKey(pPropertyName), string.IsNullOrWhiteSpace(pMessage) ? CreateInvalidPropertyBrokenRuleMessage(pPropertyName) : pMessage);
+                AddBrokenRule(BrokenRuleMessageTypes.Impediment, CreateRequiredPropertyBrokenRuleSystemKey(propertyName), string.IsNullOrWhiteSpace(message) ? CreateRequiredPropertyBrokenRuleMessage(propertyName) : message);
             }
             catch (Exception ex)
             {
@@ -198,11 +173,11 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void RemoveInvalidPropertyBrokenRule(string pPropertyName)
+        public void RemoveRequiredPropertyBrokenRule(string propertyName)
         {
             try
             {
-                RemoveBrokenRule(CreateInvalidPropertyBrokenRuleSystemKey(pPropertyName));
+                RemoveBrokenRule(CreateRequiredPropertyBrokenRuleSystemKey(propertyName));
             }
             catch (Exception ex)
             {
@@ -210,12 +185,24 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void AddError(string pSystemKey, string pMessage)
+        public void AddInvalidPropertyBrokenRule(string propertyName, string message = null)
         {
             try
             {
-                if (_Errors.Count(lbda => lbda.SystemKey.Equals(pSystemKey)) == 0)
-                    _Errors.Add(new ErrorMessage(pSystemKey, pMessage));
+                AddBrokenRule(BrokenRuleMessageTypes.Impediment, CreateInvalidPropertyBrokenRuleSystemKey(propertyName), string.IsNullOrWhiteSpace(message) ? CreateInvalidPropertyBrokenRuleMessage(propertyName) : message);
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+        }
+
+        public void RemoveInvalidPropertyBrokenRule(string propertyName)
+        {
+            try
+            {
+                RemoveBrokenRule(CreateInvalidPropertyBrokenRuleSystemKey(propertyName));
             }
             catch (Exception ex)
             {
@@ -223,14 +210,12 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void AddError(ErrorMessage pError)
+        public void AddError(string systemKey, string message)
         {
             try
             {
-                if (pError == null)
-                    throw new ArgumentNullException(string.Format("Argument null ({0})", "pError"));
-
-                AddError(pError.SystemKey, pError.Message);
+                if (_Errors.Count(lbda => lbda.SystemKey.Equals(systemKey)) == 0)
+                    _Errors.Add(new ErrorMessage(systemKey, message));
             }
             catch (Exception ex)
             {
@@ -238,14 +223,29 @@ namespace CrossPlatform.Messages
             }
         }
 
-        public void AddErrors(IEnumerable<ErrorMessage> pErrors)
+        public void AddError(ErrorMessage errorMessage)
         {
             try
             {
-                if (pErrors == null)
-                    throw new ArgumentNullException(string.Format("Argument null ({0})", "pErrors"));
+                if (errorMessage == null)
+                    throw new ArgumentNullException(string.Format("Argument null ({0})", "errorMessage"));
 
-                foreach (var _error in pErrors)
+                AddError(errorMessage.SystemKey, errorMessage.Message);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public void AddErrors(IEnumerable<ErrorMessage> errorMessages)
+        {
+            try
+            {
+                if (errorMessages == null)
+                    throw new ArgumentNullException(string.Format("Argument null ({0})", "errorMessages"));
+
+                foreach (var _error in errorMessages)
                 {
                     AddError(_error);
                 }
@@ -258,18 +258,18 @@ namespace CrossPlatform.Messages
 
         #endregion
 
-        public void AddException(Exception pException)
+        public void AddException(Exception ex)
         {
-            if (pException.GetType() == typeof(InvalidOperationException))
-                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "InvalidOperationException", pException.Message);
-            else if (pException.GetType() == typeof(ArgumentException))
-                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "ArgumentException", pException.Message);
-            else if (pException.GetType() == typeof(ArgumentNullException))
-                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "ArgumentNullException", pException.Message);
-            else if (pException.GetType() == typeof(ArgumentOutOfRangeException))
-                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "ArgumentOutOfRangeException", pException.Message);
+            if (ex.GetType() == typeof(InvalidOperationException))
+                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "InvalidOperationException", ex.Message);
+            else if (ex.GetType() == typeof(ArgumentException))
+                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "ArgumentException", ex.Message);
+            else if (ex.GetType() == typeof(ArgumentNullException))
+                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "ArgumentNullException", ex.Message);
+            else if (ex.GetType() == typeof(ArgumentOutOfRangeException))
+                AddBrokenRule(BrokenRuleMessageTypes.Impediment, "ArgumentOutOfRangeException", ex.Message);
             else
-                AddError("Exception", string.Format("Erro desconhecido. (ExceptionType: {0} - Message: {1})", pException.GetType().ToString(), pException.Message));
+                AddError("Exception", string.Format("Erro desconhecido. (ExceptionType: {0} - Message: {1})", ex.GetType().ToString(), ex.Message));
         }
 
         private static string CreateInvalidPropertyBrokenRuleMessage(string pPropertyName)

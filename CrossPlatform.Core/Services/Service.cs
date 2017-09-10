@@ -5,33 +5,33 @@ namespace CrossPlatform.Services
 {
     public abstract class Service<TServiceArgs> where TServiceArgs : ServiceArgs
     {
-        public virtual Task<ServiceResult> Execute(TServiceArgs pServiceArgs)
+        public virtual Task<ServiceResult> Execute(TServiceArgs serviceArgs)
         {
             try
             {
-                if (pServiceArgs == null)
-                    throw new ArgumentNullException("pServiceArgs");
+                if (serviceArgs == null)
+                    throw new ArgumentNullException("serviceArgs");
 
-                return ExecuteCore(pServiceArgs);
+                return ExecuteCore(serviceArgs);
             }
             catch (Exception ex) { throw ex; }
         }
 
-        protected internal abstract Task<ServiceResult> ExecuteCore(TServiceArgs pServiceArgs);
+        protected internal abstract Task<ServiceResult> ExecuteCore(TServiceArgs serviceArgs);
     }
 
     public abstract class Service<TServiceResult, TServiceArgs>
         where TServiceResult : ServiceResult
         where TServiceArgs : ServiceArgs
     {
-        public virtual Task<TServiceResult> Execute(TServiceArgs pServiceArgs)
+        public virtual Task<TServiceResult> Execute(TServiceArgs serviceArgs)
         {
             try
             {
-                if (pServiceArgs == null)
-                    throw new ArgumentNullException("pServiceArgs");
+                if (serviceArgs == null)
+                    throw new ArgumentNullException("serviceArgs");
 
-                return ExecuteCore(pServiceArgs);
+                return ExecuteCore(serviceArgs);
             }
             catch (Exception ex) { throw ex; }
         }

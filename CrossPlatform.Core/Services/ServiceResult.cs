@@ -8,9 +8,9 @@ namespace CrossPlatform.Services
         {
         }
 
-        public ServiceResult(MessagesContainer pMessagesContainer) : this()
+        public ServiceResult(MessagesContainer messagesContainer) : this()
         {
-            this.CopyMessages(pMessagesContainer);
+            this.CopyMessages(messagesContainer);
         }
     }
 }

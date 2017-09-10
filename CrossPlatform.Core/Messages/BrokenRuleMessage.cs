@@ -10,10 +10,10 @@
 
         }
 
-        public BrokenRuleMessage(BrokenRuleMessageTypes pType, string pSystemKey, string pMessage)
-            : base(pSystemKey, pMessage)
+        public BrokenRuleMessage(BrokenRuleMessageTypes messageType, string systemKey, string message)
+            : base(systemKey, message)
         {
-            this.Type = pType;
+            this.Type = messageType;
         }
     }
 }
