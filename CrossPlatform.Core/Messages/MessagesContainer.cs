@@ -272,42 +272,42 @@ namespace CrossPlatform.Messages
                 AddError("Exception", string.Format("Erro desconhecido. (ExceptionType: {0} - Message: {1})", ex.GetType().ToString(), ex.Message));
         }
 
-        private static string CreateInvalidPropertyBrokenRuleMessage(string pPropertyName)
+        private static string CreateInvalidPropertyBrokenRuleMessage(string propertyName)
         {
-            return string.Format("A propriedade \"{0}\" está inválida", pPropertyName);
+            return string.Format("A propriedade \"{0}\" está inválida", propertyName);
         }
 
-        private static string CreateInvalidPropertyBrokenRuleSystemKey(string pPropertyName)
+        private static string CreateInvalidPropertyBrokenRuleSystemKey(string propertyName)
         {
-            return string.Format("{0}Invalid", pPropertyName);
+            return string.Format("{0}Invalid", propertyName);
         }
 
-        private static string CreateRequiredPropertyBrokenRuleMessage(string pPropertyName)
+        private static string CreateRequiredPropertyBrokenRuleMessage(string propertyName)
         {
-            return string.Format("A propriedade \"{0}\" é requerida", pPropertyName);
+            return string.Format("A propriedade \"{0}\" é requerida", propertyName);
         }
 
-        private static string CreateRequiredPropertyBrokenRuleSystemKey(string pPropertyName)
+        private static string CreateRequiredPropertyBrokenRuleSystemKey(string propertyName)
         {
-            return string.Format("{0}Required", pPropertyName);
+            return string.Format("{0}Required", propertyName);
         }
 
-        protected bool HasInvalidPropertyBrokenRule(string pPropertyName)
+        protected bool HasInvalidPropertyBrokenRule(string propertyName)
         {
-            return GetBrokenRule(CreateInvalidPropertyBrokenRuleSystemKey(pPropertyName)) != null;
+            return GetBrokenRule(CreateInvalidPropertyBrokenRuleSystemKey(propertyName)) != null;
         }
 
-        protected bool HasRequiredPropertyBrokenRule(string pPropertyName)
+        protected bool HasRequiredPropertyBrokenRule(string propertyName)
         {
-            return GetBrokenRule(CreateRequiredPropertyBrokenRuleSystemKey(pPropertyName)) != null;
+            return GetBrokenRule(CreateRequiredPropertyBrokenRuleSystemKey(propertyName)) != null;
         }
 
-        public void CopyMessages(MessagesContainer pArgs)
+        public void CopyMessages(MessagesContainer messagesContainer)
         {
-            if (pArgs != null)
+            if (messagesContainer != null)
             {
-                AddBrokenRules(pArgs.BrokenRules);
-                AddErrors(pArgs.Errors);
+                AddBrokenRules(messagesContainer.BrokenRules);
+                AddErrors(messagesContainer.Errors);
             }
         }
     }

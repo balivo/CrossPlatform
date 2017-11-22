@@ -7,10 +7,5 @@ namespace CrossPlatform.Services
         public ServiceResult() : base()
         {
         }
-
-        public ServiceResult(MessagesContainer messagesContainer) : this()
-        {
-            this.CopyMessages(messagesContainer);
-        }
     }
 }

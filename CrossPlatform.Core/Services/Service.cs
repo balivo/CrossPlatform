@@ -36,6 +36,6 @@ namespace CrossPlatform.Services
             catch (Exception ex) { throw ex; }
         }
 
-        protected internal abstract Task<TServiceResult> ExecuteCore(TServiceArgs pServiceArgs);
+        protected internal abstract Task<TServiceResult> ExecuteCore(TServiceArgs serviceArgs);
     }
 }
