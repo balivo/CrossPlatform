@@ -1,7 +1,48 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netstandard2.0</TargetFramework>
+    <TargetFrameworks>netstandard2.0;portable-net45+win8+wpa81+wp8;</TargetFrameworks>
+    <AssemblyVersion>1.0.5.6</AssemblyVersion>
+    <FileVersion>1.0.5.6</FileVersion>
+    <VersionPrefix>1.0.5</VersionPrefix>
+    <Authors>Jefferson S. Balivo</Authors>
+    <Company>OnFriday Technologies</Company>
+    <Product>CrossPlatform.Core</Product>
+    <Description>Core tools for Cross Platform designed software architecture</Description>
+    <Copyright>Copyright © Jefferson S. Balivo 2017</Copyright>
+    <Summary>Core tools for Cross Platform designed software architecture</Summary>
+    <NeutralLanguage>en-US</NeutralLanguage>
+    <Title>CrossPlatform.Core</Title>
+    <PackageId>CrossPlatform.Core</PackageId>
+    <PackageTags>CrossPlatform Cross Platform Architecture</PackageTags>
+    <PackageIconUrl>https://github.com/balivo/CrossPlatform/assets/ic_nuget.png</PackageIconUrl>
+    <PackageProjectUrl>https://github.com/balivo/CrossPlatform</PackageProjectUrl>
+    <PackageLicenseUrl>https://github.com/balivo/CrossPlatform/readme.md</PackageLicenseUrl>
+    <RepositoryUrl>https://github.com/balivo/CrossPlatform</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <RootNamespace>CrossPlatform</RootNamespace>
+    <AssemblyName>CrossPlatform.Core</AssemblyName>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <NetStandardImplicitPackageVersion>2.0.0</NetStandardImplicitPackageVersion>
+    <MinClientVersion>2.12</MinClientVersion>
+    <Version>1.0.5.6</Version>
   </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
+    <AssemblyTitle>CrossPlatform.Core .NET Standard 2.0</AssemblyTitle>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
+    <AssemblyTitle>CrossPlatform.Core Portable</AssemblyTitle>
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
+    <NugetTargetMoniker>.NETPortable,Version=v0.0,Profile=Profile259</NugetTargetMoniker>
+    <LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
 
 </Project>
