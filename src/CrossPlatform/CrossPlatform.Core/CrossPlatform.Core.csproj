@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.0;portable-net45+win8+wpa81+wp8;</TargetFrameworks>
+    <TargetFrameworks>netstandard2.0;portable-net45+win8+wpa81+wp8;portable-net40+win8+wpa81+wp8+sl5</TargetFrameworks>
     <AssemblyVersion>1.0.5.6</AssemblyVersion>
     <FileVersion>1.0.5.6</FileVersion>
     <VersionPrefix>1.0.5</VersionPrefix>
@@ -31,9 +31,18 @@
   <PropertyGroup Condition="'$(TargetFramework)' == 'netstandard2.0'">
     <AssemblyTitle>CrossPlatform.Core .NET Standard 2.0</AssemblyTitle>
   </PropertyGroup>
+  
+  <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net40+win8+wpa81+wp8+sl5'">
+    <AssemblyTitle>CrossPlatform.Core Portable .NET 4.0</AssemblyTitle>
+    <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>Profile328</TargetFrameworkProfile>
+    <NugetTargetMoniker>.NETPortable,Version=v0.0,Profile=Profile328</NugetTargetMoniker>
+    <LanguageTargets>$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets</LanguageTargets>
+  </PropertyGroup>
 
   <PropertyGroup Condition="'$(TargetFramework)' == 'portable-net45+win8+wpa81+wp8'">
-    <AssemblyTitle>CrossPlatform.Core Portable</AssemblyTitle>
+    <AssemblyTitle>CrossPlatform.Core Portable .NET 4.5</AssemblyTitle>
     <TargetFrameworkIdentifier>.NETPortable</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Profile259</TargetFrameworkProfile>
