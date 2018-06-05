@@ -20,9 +20,9 @@ namespace CrossPlatform.Services
         protected internal abstract Task<ServiceResult> ExecuteCore(TServiceArgs serviceArgs);
     }
 
-    public abstract class Service<TServiceResult, TServiceArgs>
-        where TServiceResult : ServiceResult
+    public abstract class Service<TServiceArgs, TServiceResult>
         where TServiceArgs : ServiceArgs
+        where TServiceResult : ServiceResult
     {
         public virtual Task<TServiceResult> Execute(TServiceArgs serviceArgs)
         {
